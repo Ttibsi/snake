@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <unistd.h>
 
 #define LEFT 'a'
 #define DOWN 's'
@@ -227,7 +226,7 @@ int main(void) {
     Movement default_dir = Move_right;
     bool exit = false;
     while (!(exit)) {
-        usleep(100000); // 0.1 sec
+        nanosleep(&((struct timespec){.tv_sec = 0, .tv_nsec = 100000000}), NULL); // 0.1 sec
         render_board(board);
 
         char c = getch();
