@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 199309L
 #include <math.h>
 #include <ncurses.h>
 #include <stdbool.h>
@@ -226,7 +227,8 @@ int main(void) {
     Movement default_dir = Move_right;
     bool exit = false;
     while (!(exit)) {
-        nanosleep(&((struct timespec){.tv_sec = 0, .tv_nsec = 100000000}), NULL); // 0.1 sec
+        struct timespec ts = {.tv_sec = 0, .tv_nsec = 100000000}; // 0.1 sec
+        nanosleep(&ts, NULL);
         render_board(board);
 
         char c = getch();
